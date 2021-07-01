@@ -54,7 +54,6 @@ firebase.auth().onAuthStateChanged(function(user) {
             });
 
             loadingScreen.style.display = 'none';
-            signupLink.style.display = 'none';
             loginLink.style.display = 'none';
         }
     } else {
@@ -65,7 +64,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 
             loadingScreen.style.display = 'none';
             console.log('No user is logged in');
-            privateLink.style.display = 'none';
             logoutLink.style.display = 'none';
             setupUsers([]);
         }
