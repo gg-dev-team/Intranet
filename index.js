@@ -52,9 +52,8 @@ firebase.auth().onAuthStateChanged(function(user) {
             db.collection('Users').onSnapshot(snapshot => {
                 setupUsers(snapshot.docs)
             });
-
             loadingScreen.style.display = 'none';
-            loginLink.style.display = 'none';
+            
         }
     } else {
         // User is signed out.
@@ -64,31 +63,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 
             loadingScreen.style.display = 'none';
             console.log('No user is logged in');
-            logoutLink.style.display = 'none';
             setupUsers([]);
         }
     }
 });
-
-
-//Create New User
-const createForm = document.querySelector('#createUserForm');
-console.log('1 works');
-if (createForm !== null) {
-    createForm.addEventListener('submit', (e) => {
-        console.log('2 works');
-        e.preventDefault();
-        console.log('3 works');
-        db.collection('Users').add({
-            Role: createForm['role'].value
-        }).then(() => {
-            console.log('6 works');
-
-            //close add user screen
-            document.querySelector('#AnimationButton').click();
-        })
-    })
-}
 
 //Logout function
 logoutLink.addEventListener('click', logout);
