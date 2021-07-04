@@ -49,7 +49,7 @@ firebase.auth().onAuthStateChanged(function(user) {
                 if (idTokenResult.claims.admin) {
                     console.log('Role: Admin');
                 }
-            }
+            });
             
             //Get Data
             db.collection('Users').onSnapshot(snapshot => {
