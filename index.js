@@ -45,8 +45,29 @@ firebase.auth().onAuthStateChanged(function(user) {
             console.log('User is logged in!');
             console.log('Email: ' + user.email);
             console.log('UID: ' + user.uid);
+            user.getIdTokenResult().then(idTokenResult => {
+                if (idTokenResult.claims.admin) {
+                  $('#alertContent').text(
+                    'You have the "Admin" role, therefore creating a user will succeed.'
+                  );
+                } else {
+                  var currentRole = getCurrentNonAdminRole(
+                    idTokenResult.claims
+                  );
 
-
+                  if (currentRole) {
+                    $('#alertContent').text(
+                      "You don't have the Admin role. You have the " +
+                        currentRole +
+                        ' role. You can try to create a user: it will fail...'
+                    );
+                  } else {
+                    $('#alertContent').text(
+                      "You don't have the Admin role. You can try to create a user: it will fail..."
+                    );
+                  }
+                }
+            }
 
             //Get Data
             db.collection('Users').onSnapshot(snapshot => {
