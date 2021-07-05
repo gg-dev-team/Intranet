@@ -47,8 +47,11 @@ firebase.auth().onAuthStateChanged(function(user) {
             console.log('UID: ' + user.uid);
             user.getIdTokenResult().then(idTokenResult => {
                 if (idTokenResult.claims.admin) {
-                    console.log('Role: Admin');
-                    document.querySelector('[data-gg="adminOnly"]').style.display='unset';
+                    console.log('Role: Admin'); 
+                    alertMessage.innerText = "Welcome " + user.displayName + ", signed in as administrator";              
+                }else{
+                    document.querySelector('[data-gg="adminOnly"]').style.display='none';
+                    alertMessage.innerText = "Welcome " + user.displayName;
                 }
             });
             
@@ -57,7 +60,7 @@ firebase.auth().onAuthStateChanged(function(user) {
                 setupUsers(snapshot.docs)
             });
             loadingScreen.style.display = 'none';
-            
+            document.querySelector('#alertTrigger').click();
         }
     } else {
         // User is signed out.
