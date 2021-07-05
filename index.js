@@ -48,6 +48,7 @@ firebase.auth().onAuthStateChanged(function(user) {
             user.getIdTokenResult().then(idTokenResult => {
                 if (idTokenResult.claims.admin) {
                     console.log('Role: Admin');
+                    document.querySelector('[data-gg="adminOnly"]').style.display='unset';
                 }
             });
             
