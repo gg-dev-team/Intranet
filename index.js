@@ -47,10 +47,12 @@ firebase.auth().onAuthStateChanged(function(user) {
             console.log('UID: ' + user.uid);
             user.getIdTokenResult().then(idTokenResult => {
                 if (idTokenResult.claims.admin) {
-                    console.log('Role: Admin'); 
+                    console.log('Role: Admin');
+                    console.log('firebase-util.js idTokenResult.claims: ', idTokenResult.claims)
                     alertMessage.innerText = "Welcome " + user.displayName + ", signed in as administrator";              
                 }else{
                     document.querySelector('[data-gg="adminOnly"]').style.display='none';
+                    console.log('firebase-util.js idTokenResult.claims: ', idTokenResult.claims)
                     alertMessage.innerText = "Welcome " + user.displayName;
                 }
             });
